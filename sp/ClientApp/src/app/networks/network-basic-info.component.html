@@ -1,0 +1,133 @@
+<table style="text-align: left; border-bottom: solid 1px #e7eadf; width: 100%">
+  <tr>
+    <td style="text-align: left; width: 50%;
+                     color:#484830; font-weight:bold; vertical-align:top ;">
+      Basic Information
+    </td>
+    <td style="text-align: right; width: 50%; font-weight:normal; vertical-align:top ;">
+      <a href=""
+        (click)="jumpToEditInfo(editNetworkModal, this.basicInfo[0].networkName, this.basicInfo[0].networkDesc,this.basicInfo[0].categoryID, this.basicInfo[0].categoryTypeID, this.basicInfo[0].recentNews);"
+        title="Edit network information" style="font-size:10pt"> <i class="fa fa fa-edit"></i>&nbsp;Edit
+        Info.</a>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td class="textDataLabel" style="width:85px; padding-top:10px;
+                              text-align: right; vertical-align:top; height:20px">
+      Description:
+    </td>
+    <td class="textDataValue" style=" padding-top:10px; text-align:left;vertical-align:top ; width:400px;">
+      {{this.basicInfo[0].networkDesc}}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="textDataLabel" style="width:150px;
+                              text-align: right; vertical-align:top; height:20px">
+      Category:
+    </td>
+    <td class="textDataValue" style=" text-align:left;vertical-align:top ;">
+      {{this.basicInfo[0].categoryDesc}}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="textDataLabel" style="width:150px;
+                              text-align: right; vertical-align:top; height:20px">
+      Category Type:
+    </td>
+    <td class="textDataValue" style=" text-align:left;vertical-align:top ;">
+      {{this.basicInfo[0].categoryTypeDesc}}
+    </td>
+  </tr>
+
+  <tr>
+    <td class="textDataLabel" style="width:85px;
+                               text-align: right; vertical-align:top; height:20px">
+      Network Owner:
+    </td>
+    <td class="textDataValue" style=" color:#484830;; text-align:left;vertical-align:top ;">
+      {{this.basicInfo[0].networkOwner}}
+    </td>
+  </tr>
+  <tr>
+    <td class="textDataLabel" style="width:150px;
+                              text-align: right; vertical-align:top; height:20px">
+      Number of Members:
+    </td>
+    <td class="textDataValue" style=" text-align:left;vertical-align:top ;">
+      {{this.basicInfo[0].memberCount}}
+    </td>
+  </tr>
+</table>
+<br />
+<table style="text-align: left; border-bottom: solid 1px #e7eadf; width: 100%">
+  <tr>
+    <td style="text-align: left; width: 50%;
+                          color:#484830; font-weight:bold; vertical-align:top ;">
+      Recent News
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td class="textDataValue" style="color: #484830;padding-top:10px">
+      {{this.basicInfo[0].recentNews}}
+    </td>
+  </tr>
+</table>
+
+
+<!-- Edit basic info modal-->
+<ng-template #editNetworkModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">Update Network</h5>
+  </div>
+  <div class="modal-body">
+    <form #editNetworkForm='ngForm'>
+      <label>{{this.netName}}</label>
+      <br>
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Network Name:</b>
+        <br />
+        <input name="txtNetworkName" id="txtNetworkName" #txtNetworkName="ngModel"
+          [(ngModel)]="netInfoModel.networkName" type="text" placeholder="Enter network name" class="form-control"
+          style=" width:450px;padding-top:1px" required />
+        <div *ngIf="txtNetworkName.errors && (txtNetworkName.dirty || txtNetworkName.touched)">
+          <span class="help-bpx" style="color:red;" *ngIf="txtNetworkName.errors.required">Network name required.</span>
+        </div>
+      </div>
+
+      <br>
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Description:</b>
+        <br />
+        <input name="txtNetworkDesc" id="txtNetworkDesc" #txtNetworkDesc="ngModel"
+          [(ngModel)]="netInfoModel.networkDesc" type="text" placeholder="Enter network description"
+          class="form-control" style=" width:450px;padding-top:1px" required />
+        <div *ngIf="txtNetworkDesc.errors && (txtNetworkDesc.dirty || txtNetworkDesc.touched)">
+          <span class="help-bpx" style="color:red;" *ngIf="txtNetworkDesc.errors.required">Network description
+            required.</span>
+        </div>
+      </div>
+
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Recent News:</b>
+        <br />
+        <textarea name="txtRecentNews" #txtRecentNews="ngModel" type="text" id="txtRecentNews"
+          [(ngModel)]="netInfoModel.recentNews" class="form-control" style="padding-top:1px; height:90px"></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="doUpdateNetwork()"
+      [disabled]="!editNetworkForm.valid || isSaving">
+      <i *ngIf="isSaving" class='fa fa-spinner fa-spin'></i> {{isSaving ?
+        "Updating..." : "Update"}}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>

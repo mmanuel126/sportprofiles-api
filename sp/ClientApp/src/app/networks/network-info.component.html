@@ -1,0 +1,327 @@
+<div class="row">
+  <div class="col-sm-14 col-md-12">
+    <div class="mb-3 card" style="padding:10px">
+      <div class='col-sm-14 col-lg-25' style="padding:10px;">
+        <!-- member name and title -->
+        <div class="container show_member_pic_bg" style="font-size:11pt">
+          <table style="width: 100%; padding:30px">
+            <tr>
+              <td style="text-align:center; width:60px;padding-top:5px" class="user-image">
+                <img id="networkImg" width="70px" height="70px"
+                  style="border-radius:50%; border-color:white; border-style:solid; border-width:thick;"
+                  src="{{this.networkImageUrlpath}}{{this.netImage}}">
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div style="text-align:center;">
+          <span height="25px"
+            style="padding-top:5px;color: #484830; vertical-align: middle; text-align: center;padding-left:6px; text-align:center;">
+            <b>{{this.netName}}</b>
+          </span>
+        </div>
+        <br>
+        <!-- tab contents -->
+        <div>
+
+          <mat-tab-group (selectedTabChange)="onTabChange($event)">
+
+            <mat-tab label="About">
+              <br>
+              <network-basic-info></network-basic-info>
+            </mat-tab>
+
+            <mat-tab label="Network Posts">
+              <br>
+              <network-posts></network-posts>
+            </mat-tab>
+
+            <mat-tab label="Discussion Board">
+              <br>
+              <discussion-board></discussion-board>
+            </mat-tab>
+
+            <mat-tab label="Events">
+              <br>
+              <app-network-events></app-network-events>
+            </mat-tab>
+
+            <mat-tab label="Members">
+              <br>
+              <network-members></network-members>
+            </mat-tab>
+
+            <mat-tab label="Administrators">
+              <br>
+              <network-admins></network-admins>
+            </mat-tab>
+
+            <mat-tab label="Settings">
+              <br>
+              <mat-tab-group [selectedIndex]="0">
+                <mat-tab label="Accessibility & General">
+                  <br>
+                  <network-settings></network-settings>
+                </mat-tab>
+                <mat-tab label="Change Photo">
+                  <br>
+                  <network-setting-change-photo></network-setting-change-photo>
+                </mat-tab>
+              </mat-tab-group>
+            </mat-tab>
+
+          </mat-tab-group>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #newPostModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">New Network Post</h5>
+  </div>
+  <div class="modal-body">
+    <form #sendReplyForm='ngForm' (ngSubmit)="doPost(sendReplyForm)">
+      <textarea autofocus name="txtResponse" rows="2" cols="20" id="txtResponse" maxlength="150" required ngModel
+        [(ngModel)]="postModel.postText"
+        style="color:Gray;border-color:LightGrey;border-width:1px;border-style:solid;font-size:9pt;height:40px; text-align:left"
+        class="form-control"></textarea>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="doPost(newPostModal)"
+      [disabled]="!sendReplyForm.valid">Post</button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #commentModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">Reply to Post</h5>
+  </div>
+  <div class="modal-body">
+    <form #sendReplyForm='ngForm' (ngSubmit)="doPost(sendReplyForm)">
+      <textarea autofocus name="txtResponse" rows="2" cols="20" id="txtResponse" maxlength="150" required ngModel
+        [(ngModel)]="postModel.postText"
+        style="color:Gray;border-color:LightGrey;border-width:1px;border-style:solid;font-size:9pt;height:40px; text-align:left"
+        class="form-control"></textarea>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="doPostReply(commentModal)"
+      [disabled]="!sendReplyForm.valid">Post</button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>
+
+<!-- Edit basic info modal-->
+<ng-template #editNetworkModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">Update Network</h5>
+  </div>
+  <div class="modal-body">
+    <form #editNetworkForm='ngForm'>
+      <label>{{this.netName}}</label>
+      <br>
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Network Name:</b>
+        <br />
+        <input name="txtNetworkName" id="txtNetworkName" #txtNetworkName="ngModel"
+          [(ngModel)]="netInfoModel.networkName" type="text" placeholder="Enter network name" class="form-control"
+          style=" width:auto;height:27px;padding-top:1px" required />
+        <div *ngIf="txtNetworkName.errors && (txtNetworkName.dirty || txtNetworkName.touched)">
+          <span class="help-bpx" style="color:red;" *ngIf="txtNetworkName.errors.required">Network name required.</span>
+        </div>
+      </div>
+
+      <br>
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Description:</b>
+        <br />
+        <input name="txtNetworkDesc" id="txtNetworkDesc" #txtNetworkDesc="ngModel"
+          [(ngModel)]="netInfoModel.networkDesc" type="text" placeholder="Enter network description"
+          class="form-control" style=" width:auto;height:27px;padding-top:1px" required />
+        <div *ngIf="txtNetworkDesc.errors && (txtNetworkDesc.dirty || txtNetworkDesc.touched)">
+          <span class="help-bpx" style="color:red;" *ngIf="txtNetworkDesc.errors.required">Network description
+            required.</span>
+        </div>
+      </div>
+
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Recent News:</b>
+        <br />
+        <textarea name="txtRecentNews" #txtRecentNews="ngModel" type="text" id="txtRecentNews"
+          [(ngModel)]="netInfoModel.recentNews" class="form-control" style="padding-top:1px; height:90px"></textarea>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="doUpdateNetwork()"
+      [disabled]="!editNetworkForm.valid || isSaving">
+      <i *ngIf="isSaving" class='fa fa-spinner fa-spin'></i> {{isSaving ?
+      "Updating..." : "Update"}}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>
+
+<!-- view discussion topic popup -->
+<ng-template #viewTopicModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">{{this.topicName}}</h5>
+  </div>
+  <div class="modal-body">
+
+    <table style="border-bottom: None 1px #e7eadf; width: 450px">
+      <tr>
+        <td height="30px" style="color: #484830; vertical-align: middle; text-align: left;width:50%;
+            width: 50%; font-weight: bold; font-size: 11pt;">
+          Discussion Posts
+        </td>
+        <td style="font-weight: normal; text-align: right; width: 50%; vertical-align:middle; font-size:10pt ">
+          <a href="" (click)="newTopicPostModal(newNetTopicPostModal)"><i class="fa fa-plus"></i>&nbsp;Add New Post</a>
+        </td>
+      </tr>
+    </table>
+    <table style="border-bottom: None 1px #e7eadf; width: 450px">
+      <tr *ngIf="topicPostCnt==0">
+        <td style=" text-align: left; width: 100%;">
+          There are no posts for this topic.
+        </td>
+      </tr>
+
+      <tr>
+        <td style="background-color: white; padding:10px 10px 10px 10px">
+          <table id="tbNetTopicPosts">
+            <tr *ngFor='let res of topicPosts | paginate: { itemsPerPage: 5, currentPage: p }; let i = index'>
+              <td style="vertical-align: top; width: 12px; text-align: left; padding-top: -100px;">
+                <input type="image" (click)="navigateToMemberProfile(res.memberID, res.memberName)" name="imgMbr"
+                  id="imgMbr"
+                  src="{{this.memberImageUrlpath}}{{(res.picturePath==null || res.picturePath=='') ? 'default.png' : res.picturePath }}"
+                  style="height:35px;width:35px;border-radius:50%" />
+              </td>
+              <td style="vertical-align: top; text-align: left;width:350px;padding-left:7px">
+                <span>
+                  <span id="lblDesc"
+                    style="color:#36454f;font-size: 10pt; background-color: seashell; padding:5px; border-radius:10px 10px 10px 10px">
+                    <a id="lbMbrName" (click)="navigateToMemberProfile(res.memberID, res.memberName)" href="#"
+                      style="font-weight:bold;">{{res.memberName}}</a>
+                    &nbsp;{{res.description}}</span>
+                  <br />
+                  <span style="font-size:9pt;">
+                    <span id="lblPostDate" style="color:Gray;">{{res.postDate}}</span>
+                    <span style="color: #596a7d">&nbsp;-</span>
+                    <a (click)="replyTopicPostModal(res.postID, replyNetTopicPostModal)" id="lbPostComment" href=""
+                      style=" font-weight: normal;">&nbsp;Reply</a>
+                  </span>
+                  <div id="#myContainer_1161"></div>
+
+                </span>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>
+
+
+<!-- templates for network topic post modals-->
+<ng-template #newNetTopicPostModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">New Network Discussion Post</h5>
+  </div>
+  <div class="modal-body">
+    <form #sendReplyForm='ngForm' (ngSubmit)="doPost(sendReplyForm)">
+      <textarea autofocus name="txtResponse" rows="2" cols="20" id="txtResponse" maxlength="150" required ngModel
+        [(ngModel)]="postModel.postText"
+        style="color:Gray;border-color:LightGrey;border-width:1px;border-style:solid;font-size:9pt;height:40px; text-align:left"
+        class="form-control"></textarea>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="doNetTopicPost(newNetTopicPostModal)"
+      [disabled]="!sendReplyForm.valid">Post</button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #replyNetTopicPostModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">Reply to Network Discussion Post</h5>
+  </div>
+  <div class="modal-body">
+    <form #sendReplyForm='ngForm' (ngSubmit)="doNetTopicPostReply(sendReplyForm)">
+      <textarea autofocus name="txtResponse" rows="2" cols="20" id="txtResponse" maxlength="150" required ngModel
+        [(ngModel)]="postModel.postText"
+        style="color:Gray;border-color:LightGrey;border-width:1px;border-style:solid;font-size:9pt;height:40px; text-align:left"
+        class="form-control"></textarea>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="doNetTopicPostReply(replyNetTopicPostModal)"
+      [disabled]="!sendReplyForm.valid">Post</button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>
+
+<!-- add new topic-->
+<ng-template #newTopicModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">Add New Topic</h5>
+  </div>
+  <div class="modal-body">
+    <form #addNewTopicForm='ngForm' (ngSubmit)="doPost(addNewTopicForm)">
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Topic Name:</b>
+        <br />
+        <input style="width:300px" name="txtTopicName" #txtTopicName="ngModel" type="text" id="txtTopicName"
+          [(ngModel)]="newTopicModel.topicName" placeholder="Enter topic name" class="form-control" required ngModel />
+        <div *ngIf="txtTopicName.errors && (txtTopicName.dirty || txtTopicName.touched)">
+          <span class="help-bpx" style="color:red;" *ngIf="txtTopicName.errors.required">Topic name is required.</span>
+        </div>
+      </div>
+
+      <div class="form-group" style="padding-bottom:15px">
+        <b>Post:</b>
+        <br />
+        <textarea autofocus name="txtTopicPost" rows="2" cols="20" id="txtTopicPost" maxlength="150" required ngModel
+          [(ngModel)]="newTopicModel.postText" placeholder="Say something for topic's first post..."
+          class="form-control"
+          style="color:Gray;border-color:LightGrey;border-width:1px;border-style:solid;height:40px; text-align:left"></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="doCreateNewTopic()"
+      [disabled]="!addNewTopicForm.valid">Create and Post</button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Cancel</button>
+  </div>
+</ng-template>
+
+<!-- delete network topic popup -->
+<ng-template #deleteDiscTopicModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">Delete Topic</h5>
+  </div>
+  <div class="modal-body">
+    <form>
+      <label>Are you sure you want to delete this topic?</label>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="deleteNetDiscussionTopic()">
+      <i *ngIf="spinner" class='fas fa-spinner fa-spin'></i> {{spinner ? "Deleting..." : "Yes"}}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">No</button>
+  </div>
+</ng-template>

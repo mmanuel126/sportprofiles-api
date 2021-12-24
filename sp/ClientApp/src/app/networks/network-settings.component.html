@@ -1,0 +1,70 @@
+<div>
+    <form class="form-horizontal" name="asSearchForm" #asSearchForm='ngForm' (ngSubmit)="saveNetworkSettings()">
+        <p class="settingPri8pt" style="padding: 10px 18px 10px 6px;">
+            You can control who can access and find network by adjusting the settings below.
+        </p>
+
+        <table>
+            <tr>
+                <td class="settingPriSearchLBL">
+                    Accessibilty
+                </td>
+            </tr>
+
+            <tr>
+                <td class="">
+
+                    <div class="form-group">
+
+                        <input type="radio" [value]="1" name="gender" [(ngModel)]="nsModel.access" ngModel> Network Open
+                        (anyone can join or invite others to join).<br>
+                        <input type="radio" [value]="2" name="gender" [(ngModel)]="nsModel.access" ngModel> Network
+                        Closed
+                        (Admins must approved requests for new members to join). <br>
+                        <input type="radio" [value]="3" name="gender" [(ngModel)]="nsModel.access" ngModel> Network not
+                        Visible (it will not appear in search results or member profiles). <br>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table border="0">
+            <tr>
+                <td class="settingPriSearchLBL">
+                    General
+                </td>
+            </tr>
+            <tr>
+                <td class="settingPrivacytSearchLeft">
+                    <span style="color:Black;font-weight:normal;"><input id="chkPostNetworkBoard"
+                            #chkPostNetworkBoard="ngModel" [(ngModel)]="nsModel.nonAdminCanWrite" ngModel
+                            type="checkbox" name="chkPostNetworkBoard" /><label style="font-weight:normal"
+                            for="chkPostNetworkBoard">&nbsp;All members can post to network board (not limited to
+                            admins).</label></span><br />
+
+                    <span style="color:Black;font-weight:normal;"><input id="chkShowNetworkEvents"
+                            #chkShowNetworkEvents="ngModel" [(ngModel)]="nsModel.showGroupEvents" ngModel
+                            type="checkbox" name="chkShowNetworkEvents" /><label style="font-weight:normal"
+                            for="chkShowNetworkEvents">&nbsp;Show network events
+                            list</label></span><br />
+
+                    <span style="color:Black;font-weight:normal;"><input id="chkEnableDiscussionBoard"
+                            #chkEnableDiscussionBoard="ngModel" [(ngModel)]="nsModel.enableDiscussionBoard" ngModel
+                            type="checkbox" name="chkEnableDiscussionBoard" /><label style="font-weight:normal"
+                            for="chkEnableDiscussionBoard">&nbsp;Enable Discusssion Board</label></span><br />
+                </td>
+
+            </tr>
+        </table>
+        <br>
+        <div>
+            <button type="submit" id="saveSearch" [disabled]="!asSearchForm.valid || isSaving"
+                class="btn btn-primary btn-md">
+                <i *ngIf="isSaving" class='fa fa-spinner fa-spin'></i>
+                {{isSaving ? "Saving..." : "Save"}}</button>
+        </div>
+        <div style="padding-bottom:60px">
+            <span style="color:green">{{this.isNetworkSuccess ? "Saved sucessfully." : ""}}</span>
+        </div>
+    </form>
+</div>

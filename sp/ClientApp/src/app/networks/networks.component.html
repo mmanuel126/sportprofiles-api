@@ -1,0 +1,104 @@
+<div class="col-sm-14 col-md-12">
+  <div class="mb-3 card" style="padding:10px">
+
+    <div class="card-header-tab card-header">
+      <div class="card-header-title font-size-lg text-capitalize font-weight-bold">
+        <i class="header-icon lnr-cloud-download icon-gradient bg-happy-itmeo"> </i>
+        Networks You Own or Joined
+      </div>
+    </div>
+    <br>
+    <div>
+      <form class="form-horizontal" (ngSubmit)="doSearch()" id="searchForm" name="searchForm" role="search"
+        class="navbar-form navbar-left">
+        <div style="font-size: 9pt;line-height: 0px;padding:3px 0px; width:250px">
+          <div class="input-group">
+            <input id="txtNetSearch" name="txtNetSearch" [(ngModel)]="this.searchModel.key" required ngModel
+              class="form-control py-2 rounded-pill mr-1 pr-5" type="search" autocomplete="off"
+              [(ngModel)]="autoCompleteModel.name" (keyup)="searchNetwork(autoCompleteModel.name)"
+              style="background-color:#f7f9fa;" placeholder="Search networks...">
+            <span class="input-group-append">
+              <button class="btn rounded-pill border-0 ml-n5" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+
+          <div class="search-result" *ngIf="flag">
+            <ul>
+              <li *ngFor="let net of networksAuto | async">
+                <a (click)="onselectNetwork(net.Name, net.networkID)">
+                  <table>
+                    <tr>
+                      <td>
+                        <a (click)="onselectNetwork(net.name, net.networkID)">
+                          <img src="{{this.networkImagesUrlPath}}{{net.networkImage}}"
+                            style="color:#596A7D;border-color:LightGrey;border-width:1px;border-style:None;height:40px;width:40px;border-radius:50%" />
+                        </a>
+                      </td>
+                      <td style="font-size:10pt">
+                        <a (click)="onselectNetwork(net.networkName, net.networkID)">
+                          {{net.networkName}}
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <div>
+      <hr style="color:darkgray; border:solid 1px #e7eadf">
+    </div>
+    <div *ngIf="spinner" style="padding-left:0px;padding-top:5px; font-size:8pt;display:block">
+      <i class="fas fa-spinner fa-spin"></i>&nbsp;Loading...
+    </div>
+
+    <div *ngIf="this.networkCnt==0;else showNetworkList_Content">
+      There are no networks to display.
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+
+<ng-template #showNetworkList_Content>
+  <div *ngIf="this.networkCnt>0" style="padding-left:0px;padding-top:7px; padding-bottom:5px;display:block">
+    {{this.networkCnt}}&nbsp;network(s) found.
+  </div>
+
+  <div id="tbMsgPartialDiv" style="background-color:white">
+    <table
+      style="width: 0px; text-align: left; border-left: 1px none #e7eadf; border-right:1px none #e7eadf; border-collapse: collapse; font-size:11pt">
+      <tbody>
+        <tr *ngFor="let res of networkList" style="border-bottom: solid 1px;border-bottom-color:#DBDBDB;">
+
+          <td
+            style="width: 40px; text-align: left; cursor:pointer;vertical-align:top; padding-top:6px;padding-right:4px"
+            class="textfonts8pt;">
+            <a (click)="onselectNetwork(res.name, res.networkID)" style="border:none">
+              <img src="{{this.networkImagesUrlPath}}{{res.networkImage}}"
+                style="color:#596A7D;border-color:LightGrey;border-width:1px;border-style:None;height:40px;width:40px;border-radius:50%" />
+            </a>
+          </td>
+          <td style="vertical-align: top; text-align: left;vertical-align:top; padding-bottom:10px"
+            class="textfonts10pt">
+            <a href="" id="lbSName" (click)="onselectNetwork(res.name, res.networkID)">
+              {{res.networkName}}</a>
+            <br />
+            <span style="color:#484830">{{res.networkDesc}}</span><br />
+            <span style="color:Gray">Created on
+              {{this._dateFormatPipe.transform(res.createdDate, "MM/dd/yyyy")}}</span><br />
+            <span style="color:Gray">Owner: {{(res.networkOwner==null) ? "Unknown" : res.networkOwner}}</span><br />
+            <span style="color:Gray">{{res.memberCount}}</span><br />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
+</ng-template>

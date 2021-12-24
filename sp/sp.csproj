@@ -1,0 +1,243 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.21" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.55.0.2449" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.6.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.6.0" />
+    <PackageReference Include="NReco.Logging.File" Version="1.1.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Remove="Google.Apis.YouTube.v3" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="Microsoft.Extensions.Logging.Log4Net.AspNetCore" />
+    <None Remove="Microsoft.IdentityModel.Tokens" />
+    <None Remove="Microsoft.NET.Test.Sdk" />
+    <None Remove="Swashbuckle.AspNetCore.Swagger" />
+    <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="NReco.Logging.File" />
+    <None Remove="Swashbuckle.AspNetCore.Annotations" />
+    <None Remove="ClientApp_old\browserslist" />
+    <None Remove="ClientApp_old\.DS_Store" />
+    <None Remove="ClientApp_old\.editorconfig" />
+    <None Remove="ClientApp_old\README.md" />
+    <None Remove="ClientApp_old\.gitignore" />
+    <None Remove="ClientApp_old\e2e\protractor.conf.js" />
+    <None Remove="ClientApp_old\e2e\src\app.e2e-spec.ts" />
+    <None Remove="ClientApp_old\e2e\src\app.po.ts" />
+    <None Remove="ClientApp_old\src\index.html" />
+    <None Remove="ClientApp_old\src\.DS_Store" />
+    <None Remove="ClientApp_old\src\main.ts" />
+    <None Remove="ClientApp_old\src\styles.css" />
+    <None Remove="ClientApp_old\src\test.ts" />
+    <None Remove="ClientApp_old\src\karma.conf.js" />
+    <None Remove="ClientApp_old\src\polyfills.ts" />
+    <None Remove="ClientApp_old\src\app\app.component.html" />
+    <None Remove="ClientApp_old\src\app\app-routing.module.ts" />
+    <None Remove="ClientApp_old\src\app\app.server.module.ts" />
+    <None Remove="ClientApp_old\src\app\.DS_Store" />
+    <None Remove="ClientApp_old\src\app\app.module.ts" />
+    <None Remove="ClientApp_old\src\app\app.component.ts" />
+    <None Remove="ClientApp_old\src\app\app.component.css" />
+    <None Remove="ClientApp_old\src\app\home\home.component.ts" />
+    <None Remove="ClientApp_old\src\app\home\home.component.html" />
+    <None Remove="ClientApp_old\src\app\nav-menu\nav-menu.component.ts" />
+    <None Remove="ClientApp_old\src\app\nav-menu\nav-menu.component.html" />
+    <None Remove="ClientApp_old\src\app\nav-menu\nav-menu.component.css" />
+    <None Remove="ClientApp_old\src\app\models\logmodel.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\login.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\user.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\jobs.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\recent-news.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\advertisement-data.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\ads.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\register.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\registered-user.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\recent-posts.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\organization\company-by-sec-industry.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\organization\schools-by-state.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\settings\notifications-setting.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\settings\member-name-info.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\settings\privacy-settings.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\settings\account-settings-info.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\messages\search-message-info.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\messages\message-info.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\messages\member-notifications.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\contacts\contact-model.ts" />
+    <None Remove="ClientApp_old\src\app\models\contacts\search-model.ts" />
+    <None Remove="ClientApp_old\src\app\models\networks\network-info-model.ts" />
+    <None Remove="ClientApp_old\src\app\models\members\profile-basic-info.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\members\profile-employment.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\members\profile-education.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\members\profile-about.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\members\profile-member.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\members\profile-contact-info.model.ts" />
+    <None Remove="ClientApp_old\src\app\models\events\member-events-model.ts" />
+    <None Remove="ClientApp_old\src\app\components\navbar.component.css" />
+    <None Remove="ClientApp_old\src\app\components\modal.component.ts" />
+    <None Remove="ClientApp_old\src\app\components\navbar.component.ts" />
+    <None Remove="ClientApp_old\src\app\components\nologin-footer.component.css" />
+    <None Remove="ClientApp_old\src\app\components\footer.component.css" />
+    <None Remove="ClientApp_old\src\app\components\nologin-footer.component.ts" />
+    <None Remove="ClientApp_old\src\app\components\footer.component.ts" />
+    <None Remove="ClientApp_old\src\app\components\index.ts" />
+    <None Remove="ClientApp_old\src\app\components\nologin-footer.component.html" />
+    <None Remove="ClientApp_old\src\app\components\navbar.component.html" />
+    <None Remove="ClientApp_old\src\app\components\footer.component.html" />
+    <None Remove="ClientApp_old\src\app\components\ads\site-ads.component.ts" />
+    <None Remove="ClientApp_old\src\app\components\ads\google-ads.component.html" />
+    <None Remove="ClientApp_old\src\app\components\ads\sponsored-ads.component.ts" />
+    <None Remove="ClientApp_old\src\app\components\ads\sponsored-ads.component.css" />
+    <None Remove="ClientApp_old\src\app\components\ads\sponsored-ads.component.html" />
+    <None Remove="ClientApp_old\src\app\components\ads\site-ads.component.html" />
+    <None Remove="ClientApp_old\src\app\components\ads\google-ads.component.ts" />
+    <None Remove="ClientApp_old\src\app\components\ads\site-ads.component.css" />
+    <None Remove="ClientApp_old\src\app\components\ads\google-ads.component.css" />
+    <None Remove="ClientApp_old\src\app\counter\counter.component.html" />
+    <None Remove="ClientApp_old\src\app\counter\counter.component.spec.ts" />
+    <None Remove="ClientApp_old\src\app\counter\counter.component.ts" />
+    <None Remove="ClientApp_old\src\app\errors\error.component.ts" />
+    <None Remove="ClientApp_old\src\app\errors\error.component.css" />
+    <None Remove="ClientApp_old\src\app\errors\error.component.html" />
+    <None Remove="ClientApp_old\src\app\account\login.component.ts" />
+    <None Remove="ClientApp_old\src\app\account\register.component.html" />
+    <None Remove="ClientApp_old\src\app\account\register.component.ts" />
+    <None Remove="ClientApp_old\src\app\account\login.component.css" />
+    <None Remove="ClientApp_old\src\app\account\forgotpwd.component.html" />
+    <None Remove="ClientApp_old\src\app\account\register.component.css" />
+    <None Remove="ClientApp_old\src\app\account\forgotpwd.component.css" />
+    <None Remove="ClientApp_old\src\app\account\login.component.html" />
+    <None Remove="ClientApp_old\src\app\account\forgotpwd.component.ts" />
+    <None Remove="ClientApp_old\src\app\fetch-data\fetch-data.component.ts" />
+    <None Remove="ClientApp_old\src\app\fetch-data\fetch-data.component.html" />
+    <None Remove="ClientApp_old\src\app\services\token.interceptor.ts" />
+    <None Remove="ClientApp_old\src\app\services\auth.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\common.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\app.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\ads.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\global-error.handler.ts" />
+    <None Remove="ClientApp_old\src\app\services\common.service.spec.ts" />
+    <None Remove="ClientApp_old\src\app\services\error-log.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\app.service.spec.ts" />
+    <None Remove="ClientApp_old\src\app\services\modal.services.ts" />
+    <None Remove="ClientApp_old\src\app\services\auth-guard-service.ts" />
+    <None Remove="ClientApp_old\src\app\services\session-mgt.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\state.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\session-mgt.service.spec.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\members.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\connections.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\networks.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\settings.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\events.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\messages.service.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\members.service.spec.ts" />
+    <None Remove="ClientApp_old\src\app\services\data\organizations.service.ts" />
+    <None Remove="ClientApp_old\src\environments\environment.prod.ts" />
+    <None Remove="ClientApp_old\src\environments\environment.ts" />
+    <None Remove="ClientApp_old\src\assets\.gitkeep" />
+    <None Remove="ClientApp_old\src\assets\images\newspapers.png" />
+    <None Remove="ClientApp_old\src\assets\images\sm3.jpeg" />
+    <None Remove="ClientApp_old\src\assets\images\sp2bg.jpeg" />
+    <None Remove="ClientApp_old\src\assets\images\sm4.jpeg" />
+    <None Remove="ClientApp_old\src\assets\images\sm5.jpeg" />
+    <None Remove="ClientApp_old\src\assets\images\siteico.png" />
+    <None Remove="ClientApp_old\src\assets\images\sp5bg.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\siteico2.png" />
+    <None Remove="ClientApp_old\src\assets\images\logo3.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\lgicon.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\sp1bg.png" />
+    <None Remove="ClientApp_old\src\assets\images\sp3bg.jpeg" />
+    <None Remove="ClientApp_old\src\assets\images\logo-inverse.png" />
+    <None Remove="ClientApp_old\src\assets\images\messages.png" />
+    <None Remove="ClientApp_old\src\assets\images\sb5.png" />
+    <None Remove="ClientApp_old\src\assets\images\sb4.jpeg" />
+    <None Remove="ClientApp_old\src\assets\images\ads\gear.png" />
+    <None Remove="ClientApp_old\src\assets\images\ads\networkAd.png" />
+    <None Remove="ClientApp_old\src\assets\images\ads\privacy2.png" />
+    <None Remove="ClientApp_old\src\assets\images\ads\talent.png" />
+    <None Remove="ClientApp_old\src\assets\images\ads\calEventAd.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\ads\connectionAd.jpeg" />
+    <None Remove="ClientApp_old\src\assets\images\ads\privacy.png" />
+    <None Remove="ClientApp_old\src\assets\images\ads\profile.png" />
+    <None Remove="ClientApp_old\src\assets\images\ads\message.png" />
+    <None Remove="ClientApp_old\src\assets\images\RecentNews\nbaPlayoffPredictions.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\RecentNews\nhl.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\RecentNews\soccer.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\RecentNews\college.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\RecentNews\baseball.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\RecentNews\nfl.jpg" />
+    <None Remove="ClientApp_old\src\assets\images\members\default.png" />
+    <Content Remove="ClientApp_old\angular.json" />
+    <Content Remove="ClientApp_old\package-lock.json" />
+    <Content Remove="ClientApp_old\package.json" />
+    <Content Remove="ClientApp_old\tslint.json" />
+    <Content Remove="ClientApp_old\tsconfig.json" />
+    <Content Remove="ClientApp_old\e2e\tsconfig.e2e.json" />
+    <Content Remove="ClientApp_old\src\tsconfig.app.json" />
+    <Content Remove="ClientApp_old\src\tslint.json" />
+    <Content Remove="ClientApp_old\src\tsconfig.server.json" />
+    <Content Remove="ClientApp_old\src\tsconfig.spec.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
+    <Compile Remove="WeatherForecast.cs" />
+  </ItemGroup>
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

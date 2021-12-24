@@ -1,0 +1,19 @@
+
+.textDataValue
+{
+    font-size: 10.5pt;
+    font-family: 'Lucida Grande', tahoma, helvetica;
+    font-weight: normal;
+    vertical-align: top;
+    color:#484830;
+}
+
+.textDataLabel {
+    width: 85px;
+    font-size: 10.5pt;
+    font-family: 'Lucida Grande', tahoma, helvetica;
+    color: #596a7d;
+    font-weight: normal;
+    text-align: right;
+    vertical-align: top;
+}

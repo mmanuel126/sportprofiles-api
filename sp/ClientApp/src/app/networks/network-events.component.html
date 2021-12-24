@@ -1,0 +1,67 @@
+<table style="border-bottom: solid 1px #e7eadf; width: 100%">
+    <tr>
+        <td
+            style="width: 50%; text-align:left; color: #484830; vertical-align: middle; font-size:12pt; font-weight:bold">
+
+        </td>
+        <td style="font-weight: normal; text-align: right; width: 50%; vertical-align:middle; font-size:10pt ">
+            <a href="" (click)="createNewEvent()"><i class="fa fa-plus"></i>&nbsp;Add New Event</a>
+        </td>
+    </tr>
+</table>
+<table style="border-bottom: none 1px #e7eadf; width: 100%">
+    <tr *ngIf="eventCnt==0">
+        <td style=" text-align: left; width: 100%;">
+            No events to display.
+        </td>
+    </tr>
+
+    <tr *ngIf="eventCnt!=0">
+        <td>
+            <table style="width: 100%; text-align: left;font-size:11pt">
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr style="padding-bottom: 7px;
+          border-bottom-style: solid; padding-bottom: 7px;
+          border-bottom-color: #e7eadf; border-bottom-width: 1px"
+                        *ngFor='let res of networkEvents | paginate: { id: "eventPager",itemsPerPage: 7, currentPage: pEvent}; let i = index'>
+
+                        <td style="vertical-align: top; width:50px; text-align: center; padding-top: 10px;
+              padding-bottom: 10px;
+              border-bottom-style: solid; padding-bottom: 7px;
+             border-bottom-color: #e7eadf; border-bottom-width: 1px
+            ">
+                            <input type="image" (click)="viewEventInfo()" name="imgEvent" id="imgEvent"
+                                src="{{this.eventImageUrlpath}}{{(res.picturePath==null || res.picturePath=='') ? 'default.png' : res.picturePath }}"
+                                style="height:50px;width:50px;border-radius:50%" />
+                        </td>
+                        <td
+                            style="vertical-align: top; text-align: left;width:350px;padding-left:0px; padding-bottom:10px; padding-top:10px">
+
+                            <a id="lbEventName" href="#" (click)="viewEventInfo()"
+                                style="font-weight:bold">{{res.planningWhat}}</a><br />
+                            <span style=" color: gray">When:&nbsp;{{res.eventDate}}</span> <br />
+                            <span style=" color: gray">Where:&nbsp;{{res.location}}</span> <br>
+
+                            <span style="color:gray">Your RSVP:&nbsp;{{res.rsvp}}&nbsp;
+                                <a href="" (click)="jumpToChangeRSVP()">(Change it)</a></span><br />
+                            <span>
+                                <a href="" (click)="jumpToDeleteEvent()">Delete Topic</a>
+                            </span>
+                            <br>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </td>
+    </tr>
+</table>
+<br>
+<div style="text-align:left !important;  font-size:12px" align="left">
+    <pagination-controls id="eventPager" (pageChange)="pEvent = $event"></pagination-controls>
+</div>
