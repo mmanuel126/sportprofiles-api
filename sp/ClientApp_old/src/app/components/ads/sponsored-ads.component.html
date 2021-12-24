@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <div class="card-hover-shadow-2x mb-3 card" style="padding:10px">
+    <div class="card-header-tab card-header">
+      <div class="card-header-title font-size-sm text-capitalize font-weight-bold">
+        <i class="header-icon lnr-lighter icon-gradient bg-amy-crisp"> </i>
+        Sponsored
+      </div>
+    </div>
+    <div class="scroll-area-lg" style="height:400px;">
+      <perfect-scrollbar [autoPropagation]="true">
+
+        <table id="tbJobs">
+          <tbody>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr *ngFor='let res of jobs | async; let i = index'>
+              <td style="vertical-align: top; width: 100%; text-align: left; padding-top: -100px;">
+                <span style="font-size:9pt">
+                  <a (click)="showJobDescPopup(lgAdModal, res.description, res.how_to_apply, res.title)" href="#"
+                    data-toggle="modal" data-target="#lgAdModal">{{res.title}}</a>
+                </span><br>
+                <span style="font-size:8pt">
+                  <a href="{{res.company_url}}" target='_blank'>{{res.company}}</a>&nbsp;-&nbsp;<span
+                    style="color:green">{{res.type}}</span>
+                </span><br>
+                <small><span style='color:gray'>location:</span>&nbsp;{{res.location}}</small><br>
+                <small><span style='color:gray'>created at:</span>&nbsp;{{res.created_at}}</small><br>
+                <hr style="color:grey">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+
+
+<!-- template for job desc popup -->
+<ng-template #lgAdModal let-c="close" let-d="dismiss" style="width:900px">
+
+  <div class="modal-header">
+    <h5 class="modal-title">{{this.jobTitle}}</h5>
+    <button type="button" class="close " aria-label="Close " (click)="d( 'Cross click') " aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div [innerHTML]="this.jobDesc"></div>
+    <div [innerHTML]="this.howToApply"></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="d( 'Cross click') ">Close</button>
+  </div>
+</ng-template>
