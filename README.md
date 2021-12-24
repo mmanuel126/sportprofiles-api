@@ -16,6 +16,7 @@ Message -- Contains API for message or communiction between functionalities.
 Account -- This is a list of interfaces containing member account functionalities such as registering and loging in users.
 Common -- a collection of common interfaces and shared functionalities used by the ES.
 Setting -- This is a list of interfaces to manage settings user preferences.
+
 To better understand what these functionalities are, please follow the swagger documentation as provided by the link http://sportprofiles.net/swagger/index.html.
 
 You can also use the swagger documentation to interact and test the API to see how they actually work.
